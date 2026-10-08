@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>@yield('title', 'Admin') | Ignite Talent Group</title>
-  <link rel="icon" href="{{ asset('assets/ignite-talent-group.svg') }}" type="image/svg+xml">
-  <link rel="stylesheet" href="{{ asset('styles.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+  <link rel="icon" href="/assets/ignite-talent-group.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body class="admin-body">
   <header class="admin-header">
     <div class="page-width admin-header-inner">
       <a class="admin-brand" href="{{ route('admin.dashboard') }}">
-        <img src="{{ asset('assets/ignite-talent-group.svg') }}" alt="Ignite Talent Group">
+        <img src="/assets/ignite-talent-group.svg" alt="Ignite Talent Group">
         <span>Admin</span>
       </a>
       <nav class="admin-nav">

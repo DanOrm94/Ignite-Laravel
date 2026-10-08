@@ -12,14 +12,14 @@
 @section('body')
   <main class="brand-landing-page">
     <div class="brand-landing-head">
-      <img src="{{ asset('assets/ignite-talent-group.svg') }}" alt="Ignite Talent Group">
+      <img src="/assets/ignite-talent-group.svg" alt="Ignite Talent Group">
       <p class="brand-landing-tagline" data-fold-text="Specialists in the markets that matter."><span aria-hidden="true"></span></p>
     </div>
     <div class="brand-grid landing-brand-grid">
       @foreach ($sectorOrder as $sk)
         @php $item = $sites[$sk]; @endphp
         <a class="brand-card" href="{{ $sk === 'construction' ? route('sector.construction') : route('sector', $sk) }}" style="--brand:{{ $item['accent'] }}">
-          <img src="{{ asset($item['logo']) }}" alt="{{ $item['name'] }}">
+          <img src="/{{ $item['logo'] }}" alt="{{ $item['name'] }}">
           <span>{{ str_replace('Specialist ', '', $item['eyebrow']) }}</span>
           <b aria-hidden="true">→</b>
         </a>
@@ -31,5 +31,5 @@
 @endsection
 
 @push('scripts')
-  <script src="{{ asset('js/landing.js') }}" defer></script>
+  <script src="/js/landing.js" defer></script>
 @endpush

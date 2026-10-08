@@ -38,7 +38,7 @@
           <div class="hero-note"><span class="pulse"></span><strong>{{ $site['image_label'] }}</strong></div>
         </div>
         <div class="hero-media">
-          <img src="{{ asset($heroImage['src']) }}" alt="{{ $heroImage['alt'] }}">
+          <img src="/{{ $heroImage['src'] }}" alt="{{ $heroImage['alt'] }}">
           <div class="hero-tint"></div>
           <div class="hero-stamp"><small>Ignite standards</small><strong>Integrity<br>Speed<br>Compliance<br>Expertise</strong></div>
         </div>
@@ -180,7 +180,7 @@
             @foreach ($sectorKeys as $sk)
               @php $item = $sites[$sk]; @endphp
               <a class="brand-card" href="{{ $sk === 'construction' ? route('sector.construction') : route('sector', $sk) }}" style="--brand:{{ $item['accent'] }}">
-                <img src="{{ asset($item['logo']) }}" alt="{{ $item['name'] }}">
+                <img src="/{{ $item['logo'] }}" alt="{{ $item['name'] }}">
                 <span>{{ str_replace('Specialist ', '', $item['eyebrow']) }}</span><b aria-hidden="true">→</b>
               </a>
             @endforeach
@@ -196,7 +196,7 @@
           </div>
           <a class="group-home-link" href="{{ route('landing') }}">
             <span>Back to</span>
-            <img src="{{ asset('assets/ignite-talent-group.svg') }}" alt="Ignite Talent Group">
+            <img src="/assets/ignite-talent-group.svg" alt="Ignite Talent Group">
             <b aria-hidden="true">→</b>
           </a>
         </div>
