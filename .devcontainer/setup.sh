@@ -31,6 +31,15 @@ $env = $set($env, "QUEUE_CONNECTION", "sync");
 $env = $set($env, "MAIL_MAILER", "log");
 $env = $set($env, "ADMIN_EMAIL", "admin@example.com");
 $env = $set($env, "ADMIN_PASSWORD", "password");
+
+// In Codespaces the forwarded port is served over HTTPS. Point APP_URL at
+// that URL and force the https scheme so assets (css/images) load.
+$codespace = getenv("CODESPACE_NAME");
+$domain = getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN") ?: "app.github.dev";
+if ($codespace) {
+    $env = $set($env, "APP_URL", "https://{$codespace}-8000.{$domain}");
+    $env = $set($env, "FORCE_HTTPS", "true");
+}
 file_put_contents($path, $env);
 '
 
