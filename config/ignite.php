@@ -18,6 +18,30 @@ return [
     // The original static site kept this closed pending the moderation flow.
     'reviews_open' => env('IGNITE_REVIEWS_OPEN', false),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Sector subdomains
+    |--------------------------------------------------------------------------
+    |
+    | When APP_DOMAIN is set (e.g. "ignitetalentgroup.co.uk"), each sector is
+    | also served natively at its own subdomain — construction.<domain>,
+    | engineering.<domain>, tech.<domain>, legal.<domain>, sales.<domain> —
+    | in addition to the path URLs (/construction, /engineering, ...).
+    |
+    | Leave APP_DOMAIN empty (local dev, Codespaces) to disable subdomain
+    | routing entirely; only the path URLs are used in that case.
+    |
+    */
+    'base_domain' => env('APP_DOMAIN'),
+
+    'subdomains' => [
+        'construction' => 'construction',
+        'engineering' => 'engineering',
+        'tech' => 'tech',
+        'legal' => 'legal',
+        'sales' => 'sales',
+    ],
+
     'contact' => [
         'phone' => '0161 566 1050',
         'phone_href' => 'tel:+441615661050',

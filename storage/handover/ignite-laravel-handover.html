@@ -223,7 +223,7 @@ php artisan view:cache</code></pre>
 <h3>Step 5 &mdash; Web server (Nginx example)</h3>
 <pre><code>server {
     listen 80;
-    server_name ignitetalentgroup.co.uk;
+    server_name ignitetalentgroup.co.uk *.ignitetalentgroup.co.uk;
     root /var/www/ignite/public;      # document root MUST be public/
 
     index index.php;
@@ -245,7 +245,34 @@ php artisan view:cache</code></pre>
     <code>Permissions-Policy: camera=(), microphone=(), geolocation=()</code>.</li>
 </ul>
 
-<h2>7. Operating the site</h2>
+<h2 class="break">7. Sector subdomains (optional)</h2>
+<p>
+  The five sectors are served on <strong>path URLs</strong> by default
+  (<code>/construction</code>, <code>/engineering</code>, <code>/tech</code>, <code>/legal</code>,
+  <code>/sales</code>). The app can <em>also</em> serve each sector natively at its own
+  subdomain &mdash; both work at once, so existing links and SEO are preserved.
+</p>
+<h3>Enable it</h3>
+<p>Set the base domain in <code>.env</code> (leave empty to disable subdomain routing entirely):</p>
+<pre><code>APP_DOMAIN=ignitetalentgroup.co.uk</code></pre>
+<p>
+  With that set, <code>construction.ignitetalentgroup.co.uk</code> serves the construction page at
+  its root, and likewise for engineering, tech, legal and sales. No redirect needed.
+</p>
+<h3>Infrastructure required (DNS + TLS)</h3>
+<ul>
+  <li><strong>DNS:</strong> point each sector subdomain (plus the apex/<code>www</code>) at the server. A wildcard record <code>*.ignitetalentgroup.co.uk</code> is the simplest.</li>
+  <li><strong>TLS:</strong> use a wildcard certificate for <code>*.ignitetalentgroup.co.uk</code> (ACM or Certbot) so every subdomain is covered by HTTPS.</li>
+  <li><strong>Web server:</strong> the Nginx <code>server_name</code> should accept the apex and the subdomains, e.g. <code>server_name ignitetalentgroup.co.uk *.ignitetalentgroup.co.uk;</code> &mdash; the document root stays <code>public/</code>.</li>
+</ul>
+<div class="note">
+  <strong>301 alternative.</strong> If you&rsquo;d rather not serve the subdomains from the app,
+  leave <code>APP_DOMAIN</code> empty and 301-redirect each subdomain to its path URL at the proxy
+  instead. Both approaches are valid; native subdomains keep the subdomain in the address bar,
+  redirects consolidate everything on the main host.
+</div>
+
+<h2>8. Operating the site</h2>
 <ul>
   <li><strong>Admin login:</strong> <code>/login</code> &rarr; <code>/admin</code>. Sign in with the seeded admin account.</li>
   <li><strong>Opening reviews:</strong> set <code>IGNITE_REVIEWS_OPEN=true</code> and re-run <code>php artisan config:cache</code>. Submissions then arrive as <em>pending</em> and must be approved in the admin area before they appear publicly.</li>
@@ -253,7 +280,7 @@ php artisan view:cache</code></pre>
   <li><strong>Updating a policy PDF:</strong> replace the file in <code>public/documents/policies/</code> keeping the same filename &mdash; no code change needed.</li>
 </ul>
 
-<h2>8. Suggested follow-ups</h2>
+<h2>9. Suggested follow-ups</h2>
 <ul>
   <li>Hero buttons (&ldquo;I&rsquo;m hiring&rdquo; / &ldquo;looking for work&rdquo;) now scroll to the contact form rather than opening an email client &mdash; confirm this is the preferred behaviour.</li>
   <li>Wire SES, confirm the sending domain, and send a test enquiry end to end.</li>

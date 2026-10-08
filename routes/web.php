@@ -58,6 +58,47 @@ Route::get('/{sector}', [PageController::class, 'sector'])
 
 /*
 |--------------------------------------------------------------------------
+| Sector subdomains (optional)
+|--------------------------------------------------------------------------
+|
+| When APP_DOMAIN is configured, serve each sector natively at its own
+| subdomain (e.g. construction.ignitetalentgroup.co.uk) in addition to the
+| path URLs above. Disabled automatically when APP_DOMAIN is empty, so
+| local dev and Codespaces are unaffected.
+|
+*/
+
+if ($baseDomain = config('ignite.base_domain')) {
+    foreach ((array) config('ignite.subdomains', []) as $sector => $subdomain) {
+        Route::domain($subdomain.'.'.$baseDomain)->group(function () use ($sector) {
+            Route::get('/', [PageController::class, 'sector'])
+                ->defaults('sector', $sector)
+                ->name("subdomain.$sector");
+
+            Route::get('/testimonials', [TestimonialController::class, 'index'])
+                ->defaults('sector', $sector)
+                ->name("subdomain.$sector.testimonials");
+
+            Route::get('/review', [TestimonialController::class, 'create'])
+                ->defaults('sector', $sector)
+                ->name("subdomain.$sector.review");
+
+            Route::post('/review', [TestimonialController::class, 'store'])
+                ->defaults('sector', $sector);
+
+            Route::post('/contact', [ContactController::class, 'store'])
+                ->name("subdomain.$sector.contact");
+
+            if ($sector === 'construction') {
+                Route::get('/policies', [PageController::class, 'policies'])
+                    ->name('subdomain.construction.policies');
+            }
+        });
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
 | Authentication (admin only)
 |--------------------------------------------------------------------------
 */
