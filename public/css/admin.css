@@ -1,0 +1,193 @@
+/* Ignite Talent Group — admin area styling. Standalone, dark editorial
+   look consistent with the public site but focused on data tables. */
+
+:root {
+  --admin-bg: #0d0f14;
+  --admin-panel: #161922;
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-text: #e7e9ef;
+  --admin-muted: #8b90a0;
+  --admin-accent: #4552ff;
+}
+
+.admin-body {
+  margin: 0;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.page-width {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+}
+
+.admin-header {
+  border-bottom: 1px solid var(--admin-border);
+  background: rgba(13, 15, 20, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+.admin-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+}
+
+.admin-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--admin-text);
+  font-weight: 600;
+}
+
+.admin-brand img { height: 28px; width: auto; }
+
+.admin-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.admin-nav a {
+  color: var(--admin-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.admin-nav a.active,
+.admin-nav a:hover { color: var(--admin-text); }
+
+.admin-logout button {
+  background: none;
+  border: 1px solid var(--admin-border);
+  color: var(--admin-muted);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-logout button:hover { color: var(--admin-text); border-color: var(--admin-text); }
+
+.admin-main { padding: 2.5rem 0 4rem; }
+
+.admin-main h1 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+.admin-main h2 { font-size: 1.2rem; margin: 2rem 0 1rem; }
+
+.admin-flash {
+  background: rgba(69, 82, 255, 0.15);
+  border: 1px solid rgba(69, 82, 255, 0.4);
+  color: #c9ceff;
+  padding: 0.8rem 1.1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.admin-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.admin-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.3rem;
+  background: var(--admin-panel);
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--admin-text);
+}
+
+.admin-stat-number { font-size: 2rem; font-weight: 700; }
+.admin-stat-label { color: var(--admin-muted); font-size: 0.9rem; }
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 0.75rem 0.8rem;
+  border-bottom: 1px solid var(--admin-border);
+  vertical-align: top;
+}
+
+.admin-table th { color: var(--admin-muted); font-weight: 600; }
+.admin-table tr.is-unhandled { background: rgba(69, 82, 255, 0.06); }
+.admin-message-cell { max-width: 340px; color: var(--admin-muted); }
+
+.admin-muted { color: var(--admin-muted); }
+
+.admin-card {
+  background: var(--admin-panel);
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.admin-card.is-approved { border-left: 3px solid #3be47e; }
+.admin-card.is-rejected { border-left: 3px solid #ff3c43; opacity: 0.75; }
+
+.admin-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.admin-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  color: var(--admin-muted);
+}
+
+.admin-rating { color: #f6ad34; }
+
+.admin-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+
+.admin-card-actions form { margin: 0; }
+
+.admin-card-actions .button,
+.admin-main .button {
+  display: inline-block;
+  border: 1px solid var(--admin-border);
+  background: transparent;
+  color: var(--admin-text);
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.admin-main .button.primary { background: var(--admin-accent); border-color: var(--admin-accent); color: #fff; }
+.admin-main .button.danger { color: #ff8a8f; border-color: rgba(255, 60, 67, 0.4); }
+.admin-main .button.ghost:hover { border-color: var(--admin-text); }
+
+.admin-pagination { margin-top: 1.5rem; }
+.admin-section { margin-bottom: 2.5rem; }

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Ignite Talent Group — Laravel Port &amp; Deployment Guide</title>
+<style>
+  :root { --accent: #4552ff; --ink: #1a1d26; --muted: #5b6170; --line: #e4e6ec; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink); margin: 0; font-size: 11pt; line-height: 1.5;
+  }
+  .page { padding: 0 54px; }
+  h1, h2, h3 { line-height: 1.2; }
+  h1 { font-size: 26pt; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 {
+    font-size: 15pt; margin: 30px 0 10px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent); color: var(--ink);
+  }
+  h3 { font-size: 12pt; margin: 18px 0 6px; color: var(--accent); }
+  p { margin: 0 0 10px; }
+  ul, ol { margin: 0 0 10px; padding-left: 20px; }
+  li { margin: 3px 0; }
+  code {
+    font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+    background: #f3f4f8; padding: 1px 5px; border-radius: 4px; font-size: 9.5pt;
+    color: #2b2f3a;
+  }
+  pre {
+    background: #14161d; color: #e7e9ef; padding: 14px 16px; border-radius: 8px;
+    overflow: auto; font-size: 9pt; line-height: 1.45; margin: 0 0 12px;
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+  .cover {
+    background: linear-gradient(135deg, #14161d 0%, #272a63 60%, var(--accent) 130%);
+    color: #fff; padding: 90px 54px 70px; margin-bottom: 10px;
+  }
+  .cover .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.18em; font-size: 10pt;
+    color: #b9beff; margin: 0 0 18px;
+  }
+  .cover h1 { color: #fff; max-width: 560px; }
+  .cover .sub { color: #d6d9f5; font-size: 12pt; max-width: 520px; margin-top: 14px; }
+  .cover .meta { margin-top: 40px; font-size: 10pt; color: #aeb3e8; }
+  .lede { color: var(--muted); font-size: 11.5pt; }
+  table { width: 100%; border-collapse: collapse; margin: 0 0 12px; font-size: 10pt; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: #f3f4f8; font-weight: 600; }
+  .pill {
+    display: inline-block; background: #eef0ff; color: var(--accent);
+    border-radius: 999px; padding: 2px 10px; font-size: 8.5pt; font-weight: 600;
+  }
+  .note {
+    border-left: 3px solid var(--accent); background: #f6f7ff;
+    padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 0 0 12px; font-size: 10pt;
+  }
+  .warn {
+    border-left: 3px solid #e0a106; background: #fff8e8;
+    padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 0 0 12px; font-size: 10pt;
+  }
+  .muted { color: var(--muted); }
+  .avoid-break { break-inside: avoid; }
+  footer.doc {
+    margin-top: 26px; padding: 14px 54px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 9pt;
+  }
+  @page { margin: 48px 0; }
+  .break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <p class="eyebrow">Technical Handover</p>
+  <h1>Ignite Talent Group<br>Static Site → Laravel Port</h1>
+  <p class="sub">What was built, how it maps to the original site, and how to deploy it on AWS EC2.</p>
+  <div class="meta">
+    Prepared 8 October 2026 &middot; Laravel 11 &middot; PHP 8.2+ &middot; Server-rendered Blade
+  </div>
+</div>
+
+<div class="page">
+
+<h2>1. Overview</h2>
+<p class="lede">
+  The original Ignite Talent Group website was a static front end (HTML, CSS and a single
+  <code>app.js</code> that built every page in the browser). It has been ported to a
+  server-rendered Laravel application so pages render on the server, content is driven from one
+  config file, and the contact and testimonial forms are backed by a real database and a
+  moderation workflow &mdash; the production flow the original README set out as the next step.
+</p>
+<p>
+  All approved marketing copy, company details, policy documents and sector branding were
+  preserved exactly. Nothing in the public-facing content was invented or changed.
+</p>
+
+<h2>2. How the port is structured</h2>
+<p>The browser-side rendering logic was moved to the server and the content was centralised.</p>
+<table>
+  <tr><th>Original (static)</th><th>Now (Laravel)</th><th>Purpose</th></tr>
+  <tr><td><code>app.js</code> data object</td><td><code>config/ignite.php</code></td><td>Single source of truth for all sector content, contact details, policy links and hero images.</td></tr>
+  <tr><td><code>app.js</code> DOM building</td><td>Blade views + <code>App\Support\SiteContent</code></td><td>The same markup, rendered server-side from config.</td></tr>
+  <tr><td><code>documents-paths.js</code></td><td><code>SiteContent::documentPath()</code></td><td>Resolves policy / certificate PDFs to their public paths.</td></tr>
+  <tr><td><code>index.html</code> inline script</td><td><code>public/js/landing.js</code></td><td>Landing tagline animation and background fibre canvas.</td></tr>
+  <tr><td>Menu toggle in <code>app.js</code></td><td><code>public/js/site.js</code></td><td>Mobile navigation (progressive enhancement only).</td></tr>
+  <tr><td><code>mailto:</code> contact form</td><td><code>ContactController</code> + <code>contact_messages</code> table</td><td>Real server-side submission, stored and emailed.</td></tr>
+  <tr><td>Testimonial prototype pages</td><td><code>TestimonialController</code> + moderation</td><td>Submissions go to a pending queue; only approved reviews publish.</td></tr>
+</table>
+
+<h2>3. What was built this phase</h2>
+
+<h3>Public site</h3>
+<ul>
+  <li>Landing brand chooser (<code>/</code>), group overview (<code>/group</code>), and the five sector pages.</li>
+  <li>Construction uses the canonical URL <code>/construction</code>; the legacy <code>/construction.html</code> and <code>/construction/index.html</code> paths <strong>301-redirect</strong> to it.</li>
+  <li>Construction compliance / policy hub at <code>/construction/policies</code> with all controlled PDFs.</li>
+  <li>Per-sector testimonials pages and a review submission form (gated &mdash; see &sect;7).</li>
+</ul>
+
+<h3>Forms &amp; data</h3>
+<ul>
+  <li>Contact form stores a <code>ContactMessage</code> and emails the Ignite inbox. Includes a honeypot anti-spam field and server-side validation.</li>
+  <li>Testimonial submissions are stored as <em>pending</em> and never shown publicly until approved.</li>
+</ul>
+
+<h3>Admin area (<code>/admin</code>, login required)</h3>
+<ul>
+  <li>Dashboard with counts of pending reviews and unhandled messages.</li>
+  <li>Testimonial moderation: approve, reject/unpublish, delete.</li>
+  <li>Contact message inbox with a handled / new toggle.</li>
+  <li>Access is restricted by the <code>admin</code> middleware (<code>EnsureUserIsAdmin</code>) &mdash; only users flagged <code>is_admin</code> can enter.</li>
+</ul>
+
+<h3>Database tables</h3>
+<ul>
+  <li><code>users</code> (with <code>is_admin</code>), plus framework tables (<code>sessions</code>, <code>cache</code>, <code>jobs</code>).</li>
+  <li><code>testimonials</code> &mdash; sector, author, rating, body, status, moderation fields.</li>
+  <li><code>contact_messages</code> &mdash; sector, name, email, message, handled timestamp.</li>
+</ul>
+
+<div class="break"></div>
+
+<h2>4. Project layout</h2>
+<pre><code>config/ignite.php            All site content (ported from app.js)
+app/Support/SiteContent.php  Content + document-path helper
+app/Http/Controllers/        PageController, ContactController,
+                             TestimonialController, Auth, Admin/*
+app/Models/                  User, Testimonial, ContactMessage
+app/Mail/                    ContactMessageReceived
+database/migrations/         users, cache, jobs, testimonials,
+                             contact_messages
+database/seeders/            DatabaseSeeder (creates first admin)
+resources/views/             layouts, partials, sector, landing,
+                             policies, testimonials, admin, mail
+public/                      styles.css, assets, hero images,
+                             documents/ (policy + certificate PDFs),
+                             js/, css/
+routes/web.php               All public + admin routes</code></pre>
+
+<h2>5. Prerequisites on the server</h2>
+<ul>
+  <li>PHP 8.2+ with extensions: <code>pdo</code>, <code>mbstring</code>, <code>openssl</code>, <code>ctype</code>, <code>tokenizer</code>, <code>xml</code>, <code>curl</code>, and the driver for your database (<code>pdo_mysql</code> for RDS).</li>
+  <li>Composer.</li>
+  <li>A web server (Nginx or Apache) with the document root pointed at <code>public/</code>.</li>
+  <li>Access to the AWS RDS MySQL database and, for email, AWS SES.</li>
+</ul>
+<div class="note">
+  <strong>Note on local build.</strong> Dependencies were not installed in the authoring
+  environment because its network proxy intercepts TLS in a way PHP&rsquo;s OpenSSL rejects
+  (<code>curl error 60</code>). This is environment-specific and does not occur on a normal EC2
+  host. All PHP files were syntax-checked and all view routes were verified instead.
+</div>
+
+<h2>6. Deployment on AWS EC2</h2>
+
+<h3>Step 1 &mdash; Get the code onto the instance</h3>
+<pre><code>git clone &lt;your-repo&gt; /var/www/ignite
+cd /var/www/ignite
+composer install --no-dev --optimize-autoloader</code></pre>
+
+<h3>Step 2 &mdash; Configure environment</h3>
+<pre><code>cp .env.example .env
+php artisan key:generate</code></pre>
+<p>Then edit <code>.env</code>:</p>
+<pre><code>APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://ignitetalentgroup.co.uk
+
+DB_CONNECTION=mysql
+DB_HOST=&lt;your-rds-endpoint&gt;
+DB_PORT=3306
+DB_DATABASE=&lt;database&gt;
+DB_USERNAME=&lt;user&gt;
+DB_PASSWORD=&lt;password&gt;
+
+MAIL_MAILER=ses
+AWS_DEFAULT_REGION=eu-west-2
+IGNITE_CONTACT_EMAIL=info@ignitetalentgroup.co.uk
+
+# First admin account (used once by the seeder)
+ADMIN_EMAIL=you@ignitetalentgroup.co.uk
+ADMIN_PASSWORD=&lt;a-strong-password&gt;
+
+# Keep the public review form closed until you are ready
+IGNITE_REVIEWS_OPEN=false</code></pre>
+
+<h3>Step 3 &mdash; Database</h3>
+<pre><code>php artisan migrate --force
+php artisan db:seed --force   # creates the admin user from the env values above</code></pre>
+<div class="warn">
+  <strong>Review the existing WordPress RDS database first.</strong> Per the original handover,
+  an existing MySQL database may already be on RDS. Reconcile these tables with any existing data
+  (or point the app at a fresh schema) rather than assuming an empty database.
+</div>
+
+<h3>Step 4 &mdash; Permissions &amp; caching</h3>
+<pre><code>chown -R www-data:www-data storage bootstrap/cache
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache</code></pre>
+
+<h3>Step 5 &mdash; Web server (Nginx example)</h3>
+<pre><code>server {
+    listen 80;
+    server_name ignitetalentgroup.co.uk;
+    root /var/www/ignite/public;      # document root MUST be public/
+
+    index index.php;
+    location / { try_files $uri $uri/ /index.php?$query_string; }
+    location ~ \.php$ {
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    location ~ /\.(?!well-known).* { deny all; }
+}</code></pre>
+
+<h3>Step 6 &mdash; HTTPS &amp; security headers</h3>
+<ul>
+  <li>Terminate TLS at the load balancer (ACM certificate) or use Certbot on the instance. HTTPS is required for production.</li>
+  <li>Re-apply the original security headers (the static site shipped these in <code>_headers</code>):
+    <code>X-Frame-Options: DENY</code>, <code>X-Content-Type-Options: nosniff</code>,
+    <code>Referrer-Policy: strict-origin-when-cross-origin</code>,
+    <code>Permissions-Policy: camera=(), microphone=(), geolocation=()</code>.</li>
+</ul>
+
+<h2>7. Operating the site</h2>
+<ul>
+  <li><strong>Admin login:</strong> <code>/login</code> &rarr; <code>/admin</code>. Sign in with the seeded admin account.</li>
+  <li><strong>Opening reviews:</strong> set <code>IGNITE_REVIEWS_OPEN=true</code> and re-run <code>php artisan config:cache</code>. Submissions then arrive as <em>pending</em> and must be approved in the admin area before they appear publicly.</li>
+  <li><strong>Contact messages:</strong> every submission is stored and emailed to <code>IGNITE_CONTACT_EMAIL</code>; triage them under Admin &rarr; Messages.</li>
+  <li><strong>Updating a policy PDF:</strong> replace the file in <code>public/documents/policies/</code> keeping the same filename &mdash; no code change needed.</li>
+</ul>
+
+<h2>8. Suggested follow-ups</h2>
+<ul>
+  <li>Hero buttons (&ldquo;I&rsquo;m hiring&rdquo; / &ldquo;looking for work&rdquo;) now scroll to the contact form rather than opening an email client &mdash; confirm this is the preferred behaviour.</li>
+  <li>Wire SES, confirm the sending domain, and send a test enquiry end to end.</li>
+  <li>Add candidate / CV functionality (private S3, authenticated recruiter portal) as a later phase, as noted in the original handover.</li>
+  <li>Add a deployment pipeline (CodeDeploy or a CI job) so <code>composer install</code> + <code>migrate</code> + cache rebuild run automatically on release.</li>
+</ul>
+
+</div>
+
+<footer class="doc">
+  Ignite Talent Group &mdash; Laravel port and deployment guide &middot; Internal technical handover.
+</footer>
+
+</body>
+</html>

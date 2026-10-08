@@ -1,0 +1,46 @@
+/* Ignite Talent Group — small additions for the server-rendered forms
+   that did not exist in the original static front end. */
+
+/* Honeypot: visually hidden but still submitted by bots. */
+.hp-field {
+  position: absolute !important;
+  left: -5000px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Validation + status messaging on the contact / review forms. */
+.contact-form-errors {
+  border: 1px solid rgba(255, 60, 67, 0.5);
+  background: rgba(255, 60, 67, 0.08);
+  color: #ffb3b6;
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.contact-form-errors ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.contact-form-note[role="status"] {
+  color: var(--accent, #4552ff);
+  font-weight: 600;
+}
+
+/* Remember-me row on the admin login form. */
+.review-form .remember {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.review-form .remember input {
+  width: auto;
+  margin: 0;
+}
