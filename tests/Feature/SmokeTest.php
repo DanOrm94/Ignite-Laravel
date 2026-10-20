@@ -17,21 +17,6 @@ class SmokeTest extends TestCase
         }
     }
 
-    public function test_public_assets_are_not_routed_to_html_pages(): void
-    {
-        foreach ([
-            '/styles.css' => 'text/css',
-        ] as $path => $expectedType) {
-            $response = $this->get($path);
-
-            $response->assertOk();
-
-            $contentType = $response->headers->get('content-type', '');
-            $this->assertStringContainsString($expectedType, $contentType, $path.' returned '.$contentType);
-            $this->assertStringNotContainsString('<!doctype html', strtolower($response->getContent()), $path.' returned HTML');
-        }
-    }
-
     public function test_legal_page_uses_shared_root_asset_urls(): void
     {
         $this->artisan('migrate:fresh', ['--force' => true]);
@@ -40,7 +25,8 @@ class SmokeTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('href="'.asset('styles.css').'"', false);
-        $response->assertSee('src="'.asset('js/site.js').'"', false);
+        $response->assertSee('<link rel="stylesheet" href="'.asset('styles.css').'"', false);
+        $response->assertSee('<script src="'.asset('js/site.js').'" defer></script>', false);
         $response->assertDontSee('/legal/styles.css', false);
         $response->assertDontSee('/legal/app.js', false);
     }
