@@ -122,6 +122,97 @@
       </div>
     </section>
 
+    @if ($key === 'sales')
+      {{-- Senior search --}}
+      <section class="sales-specialist-section sales-senior-section" id="senior-search">
+        <div class="sales-specialist-inner sales-senior-inner">
+          <div class="sales-specialist-copy">
+            <p class="sales-specialist-kicker">Senior Appointments</p>
+            <h2>C-suite, VP and senior leadership search</h2>
+            <p>We do more than recruit salespeople. Our senior search work spans C-suite and VP-level appointments across sales, legal and compliance, alongside senior commercial and functional leadership.</p>
+          </div>
+          <div class="sales-senior-list">
+            <span>C-suite</span><span>VP-level</span><span>Sales leadership</span><span>Legal leadership</span><span>Compliance leadership</span>
+          </div>
+        </div>
+      </section>
+
+      {{-- Volume recruitment --}}
+      <section class="sales-specialist-section sales-volume-section" id="volume-recruitment">
+        <div class="sales-specialist-inner sales-volume-inner">
+          <div class="sales-specialist-copy">
+            <p class="sales-specialist-kicker">Volume Recruitment</p>
+            <h2>Need to hire 5, 10 or 50+ salespeople?</h2>
+            <h3>We can scale with you.</h3>
+            <p>Whether you're launching a new sales team, expanding an existing operation or replacing multiple vacancies, Ignite can deliver a recruitment campaign built around your volume requirements.</p>
+            <p>Our reach across the market allows us to build targeted campaigns designed to engage multiple relevant candidates at short notice, while keeping the process structured and consistent.</p>
+          </div>
+          <div class="sales-volume-service">
+            <p class="sales-volume-label">Our volume recruitment service can include:</p>
+            <ul>
+              <li>Multiple-role campaigns</li>
+              <li>Dedicated recruitment support</li>
+              <li>Targeted advertising</li>
+              <li>Proactive candidate sourcing</li>
+              <li>Screening &amp; shortlisting</li>
+              <li>Interview coordination</li>
+              <li>Offer management</li>
+              <li>Ongoing candidate engagement</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {{-- Meet the team --}}
+      <section class="sales-team-section" id="meet-the-team">
+        <div class="sales-team-inner">
+          <div class="sales-team-heading">
+            <p class="sales-specialist-kicker">Meet the Team</p>
+            <h2>Specialist market knowledge, direct access.</h2>
+          </div>
+          <div class="sales-team-grid">
+            <article class="sales-team-card">
+              <div class="sales-team-photo-wrap">
+                <img class="sales-team-photo" src="{{ asset('kyle.jpg') }}" alt="Kyle Maslen, Senior Recruitment Consultant at Ignite Talent Group" loading="lazy" width="520" height="390">
+              </div>
+              <div class="sales-team-profile">
+                <p class="sales-specialist-kicker">Senior Recruitment Consultant</p>
+                <h3>Kyle Maslen</h3>
+                <p class="sales-team-role">Senior Recruitment Consultant · Ignite Talent Group</p>
+                <p>Kyle specialises in recruitment across FinTech, payments and digital assets, partnering with founders and leadership teams to build the talent behind their growth.</p>
+                <p>His expertise spans embedded payments, banking and remittance infrastructure, crypto liquidity, institutional staking, tokenisation and DeFi. He recruits across commercial and executive functions, from specialist sales and business development hires to Heads of Sales, Chief Commercial Officers, Chief Revenue Officers, CEOs and General Counsel.</p>
+                <p>Kyle’s particular strength is placing the right Head of Sales or C level leader, then working closely with them to build their go to market team. By understanding their strategy and the capabilities they need, he helps shape teams that can deliver their growth ambitions.</p>
+                <p>Combining an entrepreneurial background with a strong understanding of these markets, Kyle takes a direct, relationship led approach, connecting businesses with people who bring the expertise, networks and commercial impact they need.</p>
+                <div class="sales-team-links">
+                  <a href="mailto:kyle.maslen@ignitetalentgroup.co.uk">Email Kyle</a>
+                  <a href="https://www.linkedin.com/in/kyle-maslen-33068a40/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+            <article class="sales-team-card">
+              <div class="sales-team-photo-wrap">
+                <img class="sales-team-photo" src="{{ asset('danielle.jpg') }}" alt="Danielle Finney, Associate Director of Sales at Ignite Talent Group" loading="lazy" width="520" height="390">
+              </div>
+              <div class="sales-team-profile">
+                <p class="sales-specialist-kicker">Sales</p>
+                <h3>Danielle Finney</h3>
+                <p class="sales-team-role">Associate Director of Sales</p>
+                <p>As an Associate Director of Sales Recruitment, I bring 15+ years of experience delivering high-volume recruitment solutions across both agency and in-house environments.</p>
+                <p>A hands-on leader, excellent in connecting exceptional talent with ambitious organisations, providing a consultative, transparent and commercially focused recruitment service that delivers results for clients, candidates and stakeholders alike.</p>
+                <p>My recruitment expertise spans a broad range of sectors, including Sales &amp; Service, PMI, Finance, Legal, Utilities and Insurance from entry level to Exec Searches.</p>
+                <p>Throughout my career, I have built a strong track record of managing complex and high-volume recruitment campaigns, developing trusted client partnerships and identifying talent that delivers long-term value.</p>
+                <p>I’m passionate about recruitment, the people behind it and the ever-changing challenges the industry presents. I take pride in delivering a high-quality, honest and results-driven service while continuing to build strong relationships and contribute to the growth of the businesses and people I work with.</p>
+                <div class="sales-team-links">
+                  <a href="mailto:danielle.finney@ignitetalentgroup.co.uk">Email Danielle</a>
+                  <a href="https://www.linkedin.com/in/danielle-finney-03210013b/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    @endif
+
     {{-- Compliance --}}
     <section class="compliance-section" id="compliance">
       <div class="page-width compliance-grid">
