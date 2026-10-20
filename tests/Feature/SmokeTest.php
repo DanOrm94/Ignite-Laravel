@@ -10,7 +10,7 @@ class SmokeTest extends TestCase
     {
         $this->artisan('migrate:fresh', ['--force' => true]);
 
-        foreach (['/', '/group', '/construction', '/engineering', '/tech', '/legal', '/sales'] as $path) {
+        foreach (['/', '/group', '/construction', '/engineering', '/tech', '/legal', '/sales', '/sales/fintech-payments-digital-assets/'] as $path) {
             $response = $this->get($path);
 
             $response->assertOk();
@@ -29,5 +29,6 @@ class SmokeTest extends TestCase
         $response->assertSee('<script src="'.asset('js/site.js').'" defer></script>', false);
         $response->assertDontSee('/legal/styles.css', false);
         $response->assertDontSee('/legal/app.js', false);
+        $this->assertStringContainsString('FinTech, Payments &amp; Digital Assets', $this->get('/sales/fintech-payments-digital-assets/')->getContent());
     }
 }
