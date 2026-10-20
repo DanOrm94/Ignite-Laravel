@@ -57,7 +57,10 @@
       <a href="#contact">Contact</a>
     @elseif ($key === 'sales')
       <a href="#expertise">Expertise</a>
+      <a href="{{ route('sales.fintech') }}">FinTech, Payments &amp; Digital Assets</a>
       <a href="#senior-search">Senior Search</a>
+      <a href="#volume-recruitment">Volume Recruitment</a>
+      <a href="#meet-the-team">Meet the Team</a>
       <a href="#clients">Clients</a>
       <a href="#candidates">Candidates</a>
       <a href="#compliance">Compliance</a>
