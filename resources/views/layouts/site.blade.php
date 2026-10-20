@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="{{ asset('styles.css') }}">
   <link rel="stylesheet" href="{{ asset('main-enhancements.css') }}">
   <link rel="stylesheet" href="{{ asset('css/site-extras.css') }}">
+  @if (request()->routeIs('sales.fintech'))
+    <link rel="stylesheet" href="{{ asset('css/fintech.css') }}">
+  @endif
   @stack('styles')
   @isset($site)
   <style>
