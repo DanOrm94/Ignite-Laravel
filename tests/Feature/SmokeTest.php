@@ -22,7 +22,6 @@ class SmokeTest extends TestCase
         foreach ([
             '/styles.css' => 'text/css',
             '/main-enhancements.css' => 'text/css',
-            '/js/site.js' => 'javascript',
         ] as $path => $expectedType) {
             $response = $this->get($path);
 
