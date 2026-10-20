@@ -8,6 +8,8 @@ class SmokeTest extends TestCase
 {
     public function test_public_landing_and_sector_routes_load(): void
     {
+        $this->artisan('migrate:fresh', ['--force' => true]);
+
         foreach (['/', '/group', '/construction', '/engineering', '/tech', '/legal', '/sales'] as $path) {
             $response = $this->get($path);
 
