@@ -753,3 +753,43 @@ td { color: #454b55; font-size: 14px; }
 .assurance-provider strong { display:block; color:#fff; font-size:15px; }
 .assurance-provider span { display:block; margin-top:5px; color:#9fa5b0; font-size:13px; line-height:1.5; }
 @media(max-width:620px){ .assurance-card strong { font-size:18px; } .assurance-card span { font-size:14px; } }
+
+
+/* Sales-specific senior search, volume hiring and team sections. */
+.sales-specialist-section,
+.sales-team-section {
+  position: relative;
+  padding: clamp(72px, 9vw, 128px) 0;
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+.sales-specialist-inner,
+.sales-team-inner { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+.sales-specialist-inner { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(280px,.75fr); gap:clamp(40px,7vw,100px); align-items:start; }
+.sales-specialist-kicker { margin:0 0 14px; color:var(--accent); font-size:.76rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.sales-specialist-copy h2,.sales-team-heading h2 { margin:0 0 20px; max-width:760px; font-size:clamp(2rem,4vw,4.25rem); line-height:.98; letter-spacing:-.045em; }
+.sales-specialist-copy p:not(.sales-specialist-kicker) { max-width:720px; color:rgba(255,255,255,.72); font-size:1.02rem; line-height:1.7; }
+.sales-senior-section { background:#111318; color:#fff; }
+.sales-senior-inner { grid-template-columns:minmax(0,1fr) minmax(260px,.55fr); }
+.sales-senior-list { display:flex; flex-wrap:wrap; gap:10px; align-content:start; }
+.sales-senior-list span { padding:11px 14px; border:1px solid rgba(255,255,255,.2); border-radius:999px; color:rgba(255,255,255,.9); font-size:.88rem; background:rgba(255,255,255,.04); }
+.sales-volume-section { background:linear-gradient(135deg,#171922,#111318); color:#fff; }
+.sales-volume-section h3 { margin:-2px 0 20px; font-size:clamp(1.35rem,2.3vw,2rem); line-height:1.1; letter-spacing:-.025em; color:#fff; }
+.sales-volume-service { padding:28px 30px; border:1px solid rgba(255,255,255,.16); border-radius:24px; background:rgba(255,255,255,.035); }
+.sales-volume-label { margin:0 0 18px; color:#fff; font-weight:700; }
+.sales-volume-service ul { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; margin:0; padding:0; list-style:none; }
+.sales-volume-service li { position:relative; padding:13px 10px 13px 26px; border-top:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.78); line-height:1.4; }
+.sales-volume-service li::before { content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:800; }
+.sales-team-heading { margin-bottom:36px; }
+.sales-team-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; align-items:stretch; }
+.sales-team-card { display:flex; flex-direction:column; height:100%; overflow:hidden; border:1px solid rgba(255,255,255,.14); background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); border-radius:28px; }
+.sales-team-photo-wrap { width:80%; aspect-ratio:4/3; margin:0 auto; overflow:hidden; border-bottom:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.035); }
+.sales-team-photo { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+.sales-team-profile { display:flex; flex:1; flex-direction:column; padding:clamp(24px,3vw,34px); background:#f8f8f6; color:#171922; }
+.sales-team-profile h3 { margin:0 0 8px; font-size:clamp(1.7rem,3vw,2.5rem); letter-spacing:-.03em; color:#171922; }
+.sales-team-profile p:not(.sales-specialist-kicker) { max-width:680px; color:rgba(23,25,34,.72); line-height:1.7; }
+.sales-team-role { margin:0 0 14px!important; color:rgba(23,25,34,.52)!important; font-size:.9rem; letter-spacing:.02em; }
+.sales-team-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:22px; }
+.sales-team-links a { display:inline-flex; gap:7px; padding:11px 16px; border:1px solid rgba(23,25,34,.18); border-radius:999px; color:#171922; text-decoration:none; transition:border-color .2s ease,background .2s ease,transform .2s ease; }
+.sales-team-links a:hover { border-color:rgba(var(--accent-rgb),.7); background:rgba(var(--accent-rgb),.1); transform:translateY(-1px); }
+@media(max-width:900px){.sales-team-grid{grid-template-columns:1fr}.sales-team-card{max-width:720px}}
+@media(max-width:760px){.sales-specialist-inner{grid-template-columns:1fr}.sales-volume-service ul{grid-template-columns:1fr}.sales-team-section{padding:64px 0}.sales-team-photo-wrap{width:80%;aspect-ratio:4/3}.sales-team-profile{padding:24px}}
