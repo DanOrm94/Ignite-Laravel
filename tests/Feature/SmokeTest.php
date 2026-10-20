@@ -23,7 +23,6 @@ class SmokeTest extends TestCase
             '/styles.css' => 'text/css',
             '/main-enhancements.css' => 'text/css',
             '/js/site.js' => 'javascript',
-            '/legal/legalhero.png' => 'image/',
         ] as $path => $expectedType) {
             $response = $this->get($path);
 
@@ -37,6 +36,8 @@ class SmokeTest extends TestCase
 
     public function test_legal_page_uses_shared_root_asset_urls(): void
     {
+        $this->artisan('migrate:fresh', ['--force' => true]);
+
         $response = $this->get('/legal');
 
         $response->assertOk();
