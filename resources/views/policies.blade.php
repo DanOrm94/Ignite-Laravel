@@ -44,7 +44,7 @@
 <div class="policy-page">
   <header class="policy-header">
     <div class="page-width policy-header-inner">
-      <a href="{{ route('sector.construction') }}" class="policy-brand"><img src="/{{ $site['logo'] }}" alt="Ignite Construction"></a>
+      <a href="{{ route('sector.construction') }}" class="policy-brand"><img src="{{ asset($site['logo']) }}" alt="Ignite Construction"></a>
       <a class="button ghost" href="{{ route('sector.construction') }}">Back to Construction <span aria-hidden="true">↗</span></a>
     </div>
   </header>

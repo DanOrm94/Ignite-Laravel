@@ -28,7 +28,7 @@
 <header class="site-header">
   <div class="page-width header-inner">
     <a class="brand" href="{{ $isGroup ? route('group') : route('landing') }}" aria-label="{{ $isGroup ? $site['name'] : 'Ignite Talent Group' }} home">
-      <img src="/{{ $site['logo'] }}" alt="{{ $site['name'] }}">
+      <img src="{{ asset($site['logo']) }}" alt="{{ $site['name'] }}">
     </a>
     <nav class="brand-switcher" aria-label="Ignite group websites">
       @if ($isGroup)
@@ -57,7 +57,10 @@
       <a href="#contact">Contact</a>
     @elseif ($key === 'sales')
       <a href="#expertise">Expertise</a>
+      <a href="{{ route('sales.fintech') }}">FinTech, Payments &amp; Digital Assets</a>
       <a href="#senior-search">Senior Search</a>
+      <a href="#volume-recruitment">Volume Recruitment</a>
+      <a href="#meet-the-team">Meet the Team</a>
       <a href="#clients">Clients</a>
       <a href="#candidates">Candidates</a>
       <a href="#compliance">Compliance</a>

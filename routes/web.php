@@ -36,6 +36,10 @@ Route::get('/construction', [PageController::class, 'sector'])
 // Construction policy & compliance hub (was construction/policies.html).
 Route::get('/construction/policies', [PageController::class, 'policies'])->name('policies');
 
+// Dedicated Sales specialist page for FinTech, payments, crypto and digital assets.
+Route::get('/sales/fintech-payments-digital-assets/', [PageController::class, 'fintech'])
+    ->name('sales.fintech');
+
 // Contact form submission (replaces the front-end mailto: workflow).
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/contact/thank-you', [ContactController::class, 'thanks'])->name('contact.thanks');

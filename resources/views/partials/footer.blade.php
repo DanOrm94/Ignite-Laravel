@@ -21,7 +21,7 @@
   </div>
   <div class="page-width footer-grid">
     <div class="footer-brand">
-      <img src="/{{ $site['logo'] }}" alt="{{ $site['name'] }}">
+      <img src="{{ asset($site['logo']) }}" alt="{{ $site['name'] }}">
       <p>Specialist recruitment with group standards.</p>
       <a class="footer-social" href="{{ $contact['linkedin'] }}" target="_blank" rel="noopener noreferrer" aria-label="Ignite Talent Group on LinkedIn">LinkedIn <span aria-hidden="true">↗</span></a>
     </div>

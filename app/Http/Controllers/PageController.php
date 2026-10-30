@@ -63,6 +63,22 @@ class PageController extends Controller
     }
 
     /**
+     * Specialist Sales landing page for FinTech, payments and digital assets.
+     */
+    public function fintech(): View
+    {
+        $site = SiteContent::site('sales');
+
+        abort_if($site === null, 404);
+
+        return view('fintech', [
+            'key' => 'sales',
+            'site' => $site,
+            'contact' => SiteContent::contact(),
+        ]);
+    }
+
+    /**
      * Construction policy & compliance hub (was construction/policies.html).
      */
     public function policies(): View

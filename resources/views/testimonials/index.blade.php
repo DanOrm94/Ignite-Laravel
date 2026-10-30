@@ -11,7 +11,7 @@
 @section('meta_description', 'Approved testimonials from candidates, clients and employers who have worked with '.$site['name'].'.')
 
 @push('styles')
-  <link rel="stylesheet" href="/testimonials.css">
+  <link rel="stylesheet" href="{{ asset('testimonials.css') }}">
 @endpush
 
 @section('body')
@@ -23,7 +23,7 @@
   </div>
   <header class="site-header">
     <div class="page-width header-inner">
-      <a class="brand" href="{{ $homeRoute }}" aria-label="{{ $site['name'] }} home"><img src="/{{ $site['logo'] }}" alt="{{ $site['name'] }}"></a>
+      <a class="brand" href="{{ $homeRoute }}" aria-label="{{ $site['name'] }} home"><img src="{{ asset($site['logo']) }}" alt="{{ $site['name'] }}"></a>
       <a class="header-cta" href="{{ $homeRoute }}">Back to {{ $site['short'] }} <span aria-hidden="true">→</span></a>
     </div>
   </header>

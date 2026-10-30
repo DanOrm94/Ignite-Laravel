@@ -10,7 +10,7 @@
 @section('title', 'Leave a review | '.$site['name'])
 
 @push('styles')
-  <link rel="stylesheet" href="/testimonials.css">
+  <link rel="stylesheet" href="{{ asset('testimonials.css') }}">
 @endpush
 
 @section('body')
@@ -22,7 +22,7 @@
   </div>
   <header class="site-header">
     <div class="page-width header-inner">
-      <a class="brand" href="{{ $homeRoute }}" aria-label="{{ $site['name'] }} home"><img src="/{{ $site['logo'] }}" alt="{{ $site['name'] }}"></a>
+      <a class="brand" href="{{ $homeRoute }}" aria-label="{{ $site['name'] }} home"><img src="{{ asset($site['logo']) }}" alt="{{ $site['name'] }}"></a>
     </div>
   </header>
   <main class="review-page">
