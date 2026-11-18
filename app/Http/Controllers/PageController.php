@@ -18,6 +18,11 @@ class PageController extends Controller
             'sites' => SiteContent::all(),
             'sectorOrder' => SiteContent::sectorOrder(),
             'group' => SiteContent::site('group'),
+            'contact' => SiteContent::contact(),
+            'contactHeadline' => SiteContent::contactHeadline('group'),
+            'reviewsOpen' => (bool) config('ignite.reviews_open', false),
+            // Latest approved reviews across every sector.
+            'testimonials' => Testimonial::approved()->latest('moderated_at')->limit(3)->get(),
         ]);
     }
 

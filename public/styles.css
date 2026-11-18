@@ -312,7 +312,7 @@ h2 { margin: 0; font-size: clamp(43px, 5.2vw, 74px); line-height: .98; letter-sp
 .footer-hero-link b { color: var(--accent); font-size: 28px; font-weight: 500; transition: transform .2s ease; }
 .footer-hero-link:hover b { transform: translate(4px,-4px); }
 .footer-grid { position: relative; display: grid; grid-template-columns: 1.4fr repeat(3, .7fr); gap: 50px; padding-top: 58px; padding-bottom: 58px; }
-.footer-brand img { width: 250px; height: 62px; object-fit: contain; object-position: left center; filter: brightness(0) invert(1); }
+.footer-brand img { box-sizing: content-box; width: 250px; height: 62px; padding: 12px 18px; border-radius: 14px; background: #fff; object-fit: contain; object-position: left center; }
 .footer-brand p { max-width: 300px; color: #9ca1ab; }
 .footer-grid > div:not(.footer-brand) { display: flex; flex-direction: column; gap: 10px; }
 .footer-grid > div > strong { margin-bottom: 12px; color: var(--accent); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }

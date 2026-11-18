@@ -65,10 +65,10 @@ return [
 
     'hero_images' => [
         'group' => ['src' => 'assets/ignite-people-hero.png', 'alt' => 'Professionals collaborating in a Manchester workplace overlooking the city'],
-        'construction' => ['src' => 'construction/constructionhero.png', 'alt' => 'Construction professionals working on site'],
-        'engineering' => ['src' => 'engineering/engineeringhero.png', 'alt' => 'Engineering professionals working in a technical environment'],
-        'tech' => ['src' => 'technology/techhero.png', 'alt' => 'Technology professionals collaborating in a modern workspace'],
-        'legal' => ['src' => 'legal/legalhero.png', 'alt' => 'Legal professionals working in a professional environment'],
+        'construction' => ['src' => 'assets/constructionhero.png', 'alt' => 'Construction professionals working on site'],
+        'engineering' => ['src' => 'assets/engineeringhero.png', 'alt' => 'Engineering professionals working in a technical environment'],
+        'tech' => ['src' => 'assets/techhero.png', 'alt' => 'Technology professionals collaborating in a modern workspace'],
+        'legal' => ['src' => 'assets/legalhero.png', 'alt' => 'Legal professionals working in a professional environment'],
         'sales' => ['src' => 'assets/ignite-people-hero.png', 'alt' => 'Sales professionals collaborating in a Manchester workplace'],
     ],
 
